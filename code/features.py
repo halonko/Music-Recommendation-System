@@ -9,7 +9,7 @@ from credentials import user_id, user_key
 
 def create_sp():
     """
-    Create 
+    Create
     :return:
     """
     client_credentials_manager = SpotifyClientCredentials(user_id, user_key)
@@ -28,14 +28,14 @@ def get_song_features(sp, song_id):
 
 
 def get_new_features(sp):
-    new_features = []
+    new_features = set()
     song_id = get_song_id(sp, 'ignorance', 'paramore')
     song_features = get_song_features(sp, song_id)
     bad_columns = ['key', 'mode', 'type', 'id', 'uri', 'track_href', 'analysis_url', 'time_signature']
     for item in song_features:
         if item not in bad_columns:
-            new_features.append(item)
-    return new_features
+            new_features.add(item)
+    return list(new_features)
 
 
 def get_song_items(sp, item):

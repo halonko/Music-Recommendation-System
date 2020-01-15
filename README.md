@@ -1,5 +1,5 @@
 # Music-Recommendation-System
-# Prerequisites
+# Prerequirements
    - python 3.6
    - pandas 0.25.3
    - scikit-learn==0.22.1
@@ -8,5 +8,5 @@
 
 # Installing
 1. Clone project.
-2. Install prerequisites.
+2. Install prerequirements.
 3. Run playlist_recommendation.ipynb.

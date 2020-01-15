@@ -8,6 +8,10 @@ from credentials import user_id, user_key
 
 
 def create_sp():
+    """
+    Create 
+    :return:
+    """
     client_credentials_manager = SpotifyClientCredentials(user_id, user_key)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     sp.trace = False

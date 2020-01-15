@@ -92,7 +92,7 @@ def add_features_to_dataset(dataset):
     for index in range(0, size_of_dataset):
         previous = dataset.loc[index]
         new_items = get_song_items(sp, previous)
-        if (index / size_of_dataset) > percentage:
+        if (index / size_of_dataset * 100) >= percentage:
             print("Current state: " + str(percentage) + " %")
             percentage += 10
         if new_items is not None:

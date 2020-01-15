@@ -62,7 +62,7 @@ def load_dataset(dataset_directory, user_data_dataset_name,
     if not check_if_file_exist(full_filename):
         dataFrame = get_dataset_from_internet(user_data_dataset_name,
                                               song_data_dataset_name)
-        dataFrame = dataFrame.head(10000)
+        dataFrame = dataFrame.head(50000)
         dataFrame = add_features_to_dataset(dataFrame)
         dataFrame.to_csv(full_filename, index=False, header=True, sep=';')
         return dataFrame

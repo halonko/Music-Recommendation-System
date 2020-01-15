@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from features import add_features_to_dataset
 
 
 def check_if_file_exist(name_of_file):
@@ -61,6 +62,7 @@ def load_dataset(dataset_directory, user_data_dataset_name,
     if not check_if_file_exist(full_filename):
         dataFrame = get_dataset_from_internet(user_data_dataset_name,
                                               song_data_dataset_name)
+        dataFrame = add_features_to_dataset(dataFrame)
         dataFrame.to_csv(full_filename, index=False, header=True, sep=';')
         return dataFrame
     else:

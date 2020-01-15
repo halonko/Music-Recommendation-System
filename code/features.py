@@ -37,9 +37,6 @@ def get_new_features(sp):
 def get_song_items(sp, item):
     try:
         new_items = []
-        print(1)
-        print(item['title'], item['artist_name'])
-        print(2)
         song_id = get_song_id(sp, item['title'], item['artist_name'])
         song_features = get_song_features(sp, song_id)
         bad_columns = ['key', 'mode', 'type', 'id', 'uri', 'track_href', 'analysis_url', 'time_signature']
@@ -64,5 +61,4 @@ def add_features_to_dataset(dataset):
             new_dataset.loc[i] = [item for item in previous] + new_items
             i += 1
 
-    print(new_dataset.head())
     return new_dataset

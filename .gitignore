@@ -1,0 +1,9 @@
+.ipynb_checkpoints/
+__pycache__/
+code/data/
+code/.idea/
+code/.ipynb_checkpoints
+code/__pycache__
+Evaluation
+Recommenders
+Song Recommender_Python.ipynb

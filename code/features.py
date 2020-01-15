@@ -54,9 +54,14 @@ def add_features_to_dataset(dataset):
     new_features = get_new_features(sp)
     new_dataset = pd.DataFrame(columns=[item for item in dataset.columns] + new_features)
     i = 0
-    for index in range(0, len(dataset)):
+    percentage = 10
+    size_of_dataset = len(dataset)
+    for index in range(0, size_of_dataset):
         previous = dataset.loc[index]
         new_items = get_song_items(sp, previous)
+        if (index / size_of_dataset) > percentage:
+            print("Current state: " + str(percentage) + " %")
+            percentage += 10
         if new_items is not None:
             new_dataset.loc[i] = [item for item in previous] + new_items
             i += 1

@@ -9,8 +9,8 @@ from credentials import user_id, user_key
 
 def create_sp():
     """
-    Create
-    :return:
+    Create spotipy client
+    :return: spotipy.Spotify
     """
     client_credentials_manager = SpotifyClientCredentials(user_id, user_key)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -19,15 +19,33 @@ def create_sp():
 
 
 def get_song_id(sp, name_of_song, artist):
+    """
+    Get song id in spotify dataset
+    :param sp: spotipy.Spotify
+    :param name_of_song: String
+    :param artist: String
+    :return: String
+    """
     results = sp.search(q='track:{} artist:{}'.format(name_of_song, artist), limit=2)
     return results['tracks']['items'][0]['uri']
 
 
 def get_song_features(sp, song_id):
+    """
+    Get song features from spotipy dataset
+    :param sp: spotipy.Spotify
+    :param song_id: String
+    :return: String
+    """
     return sp.audio_features(song_id)[0]
 
 
 def get_new_features(sp):
+    """
+    Get all needed features from spotipy dataset
+    :param sp: spotipy.Spotify
+    :return: list
+    """
     new_features = set()
     song_id = get_song_id(sp, 'ignorance', 'paramore')
     song_features = get_song_features(sp, song_id)
@@ -39,6 +57,12 @@ def get_new_features(sp):
 
 
 def get_song_items(sp, item):
+    """
+    Get songs dataset
+    :param sp: spotipy.Spotify
+    :param item: pd.DataFrame
+    :return: None or List
+    """
     try:
         new_items = []
         song_id = get_song_id(sp, item['title'], item['artist_name'])
@@ -53,6 +77,11 @@ def get_song_items(sp, item):
 
 
 def add_features_to_dataset(dataset):
+    """
+    Adding new features and items to dataset without replace
+    :param dataset: pandas.DataFrame
+    :return: pandas.DataFrame
+    """
     sp = create_sp()
 
     new_features = get_new_features(sp)
@@ -63,7 +92,7 @@ def add_features_to_dataset(dataset):
     for index in range(0, size_of_dataset):
         previous = dataset.loc[index]
         new_items = get_song_items(sp, previous)
-        if (index / size_of_dataset) > percentage:
+        if (index / size_of_dataset * 100) >= percentage:
             print("Current state: " + str(percentage) + " %")
             percentage += 10
         if new_items is not None:

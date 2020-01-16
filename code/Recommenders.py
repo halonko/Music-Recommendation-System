@@ -3,7 +3,7 @@ import pandas
 
 
 # Class for Popularity based Recommender System model
-class popularity_recommender_py():
+class PopularityRecommender(object):
     def __init__(self):
         self.train_data = None
         self.user_id = None
@@ -46,7 +46,7 @@ class popularity_recommender_py():
 
 
 # Class for Item similarity based Recommender System model
-class item_similarity_recommender_py():
+class ItemSimilarityRecommender(object):
     def __init__(self):
         self.train_data = None
         self.user_id = None
@@ -121,7 +121,8 @@ class item_similarity_recommender_py():
         return cooccurence_matrix
 
     # Use the cooccurence matrix to make top recommendations
-    def generate_top_recommendations(self, user, cooccurence_matrix, all_songs, user_songs):
+    @staticmethod
+    def generate_top_recommendations(user, cooccurence_matrix, all_songs, user_songs):
         print("Non zero values in cooccurence_matrix :%d" % np.count_nonzero(cooccurence_matrix))
 
         # Calculate a weighted average of the scores in cooccurence matrix for all user songs.

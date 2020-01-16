@@ -3,7 +3,7 @@
 import random
 
 
-class precision_recall_calculator():
+class PrecisionRecallCalculator(object):
 
     def __init__(self, test_data, train_data, pm, is_model):
         self.test_data = test_data
@@ -17,7 +17,8 @@ class precision_recall_calculator():
         self.test_dict = dict()
 
     # Method to return random percentage of values from a list
-    def remove_percentage(self, list_a, percentage):
+    @staticmethod
+    def remove_percentage(list_a, percentage):
         k = int(len(list_a) * percentage)
         random.seed(0)
         indicies = random.sample(range(len(list_a)), k)
@@ -108,7 +109,7 @@ class precision_recall_calculator():
             pm_avg_precision_list.append(pm_avg_precision)
             pm_avg_recall_list.append(pm_avg_recall)
 
-        return (pm_avg_precision_list, pm_avg_recall_list, ism_avg_precision_list, ism_avg_recall_list)
+        return pm_avg_precision_list, pm_avg_recall_list, ism_avg_precision_list, ism_avg_recall_list
 
     # A wrapper method to calculate all the evaluation measures
     def calculate_measures(self, percentage):

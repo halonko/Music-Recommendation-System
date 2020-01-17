@@ -81,10 +81,6 @@ class PrecisionRecallCalculator(object):
             ism_sum_recall = 0
             pm_sum_precision = 0
             pm_sum_recall = 0
-            ism_avg_precision = 0
-            ism_avg_recall = 0
-            pm_avg_precision = 0
-            pm_avg_recall = 0
 
             for user_id in self.users_test_sample:
                 ism_hitset = self.test_dict[user_id].intersection(set(self.ism_training_dict[user_id][0:N]))
